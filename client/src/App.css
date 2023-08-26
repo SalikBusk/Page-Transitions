@@ -7,5 +7,15 @@ h1{
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: var(--accent);
+    background: #9900ff;
+}
+
+.privacy-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #9900ff;
+    z-index: 999;
 }

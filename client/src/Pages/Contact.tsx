@@ -1,13 +1,13 @@
 import React from 'react'
-import Transition from '../Transition/Transition';
+import PageTransition from '../Transition/PageTransition';
 
 const Contact = () => {
   return (
-     <Transition OgComponent={() => (
-      <div className='flex flex-col items-center justify-center w-full h-screen'>
+     <PageTransition>
+     <div className='flex flex-col items-center justify-center w-full h-screen'>
         <h1>Contact</h1>
       </div>
-    )} />
+     </PageTransition>
   )
 }
 

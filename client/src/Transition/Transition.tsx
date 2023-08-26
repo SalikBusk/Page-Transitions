@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface TransitionProps {
   OgComponent: React.ComponentType<any>;
@@ -7,24 +7,28 @@ interface TransitionProps {
 
 const Transition: React.FC<TransitionProps> = ({ OgComponent }) => {
   return (
-    <div>
+    <AnimatePresence>
       <OgComponent />
-      <motion.div 
-        className='fixed inset-0 h-screen bg-[#0f0f0f] origin-bottom'
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 0 }}
-        exit={{ scaleY: 1 }}
-        transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
+      <motion.div
+        initial="pageInitial"
+        animate="pageAnimate"
+        exit="pageExit"
+        variants={{
+          pageInitial: {
+            opacity: 0,
+          },
+          pageAnimate: {
+            opacity: 1,
+          },
+          pageExit: {
+            backgroundColor: 'white',
+            filter: 'invert()',
+            opacity: 0,
+          }
+        }}
       />
-      <motion.div 
-        className='fixed inset-0 h-screen bg-[#0f0f0f] origin-top'
-        initial={{ scaleY: 1 }}
-        animate={{ scaleY: 0 }}
-        exit={{ scaleY: 0 }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      />
-    </div>
+    </AnimatePresence>
   );
-}
+};
 
 export default Transition;

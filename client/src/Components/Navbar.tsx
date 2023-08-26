@@ -26,15 +26,15 @@ const MenuItem: React.FC<MenuItemProps> = ({label, path}) => {
 const Navigation = () => {
   const Nav = [
     {
-      label: "Home",
+      label: "Index.tsx",
       path: "/",
     },
     {
-      label: "About",
+      label: "About.tsx",
       path: "/about",
     },
     {
-      label: "Contact",
+      label: "Contact.tsx",
       path: "/contact",
     },
   ]
@@ -51,7 +51,7 @@ const Navigation = () => {
 
 const Navbar = () => {
   return (
-    <div className="fixed w-full">
+    <div className="fixed w-full z-[1000]">
       <Container>
         <div className="flex flex-row justify-between items-center py-2">
         <Logo/>
