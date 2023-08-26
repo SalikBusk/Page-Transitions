@@ -2,3 +2,10 @@ h1{
     font-size: 10vw;
     font-weight: 500;
 }
+
+.box {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: var(--accent);
+}
