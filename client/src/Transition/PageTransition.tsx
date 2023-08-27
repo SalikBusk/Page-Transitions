@@ -1,53 +1,42 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface PageTransitionProps {
   children: React.ReactNode;
 }
 
 const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsVisible(false);
+    }, 500); 
+
+    return () => clearTimeout(timeout);
+  }, []);
   return (
     <>
-    <motion.div
-      className='fixed bg-rose-500 inset-0'
-      initial="pageInitial"
-      animate="pageAnimate"
-      exit="pageExit"
-      variants={{
-        pageInitial: {
-          scaleX: 1,
-          // opacity: 0,
-          // filter: "blur(10px)",
-        },
-        pageAnimate: {
-          scaleX: 0,
-          // opacity: 1,
-          // filter: "blur(0px)",
-          transition: {
-            delay:1,  
-            duration: 1,
-            ease: "circOut"
-          }
-        },
-        pageExit: {
-          scaleX: 1,
-          // filter: "blur(10px)",
-          // opacity: 0,
-          transition: {
-            delay:1,  
-            duration: 1,
-            ease: "circIn"
-          },
-        },
-      }}
-      transition={{
-        delay:1,    
-        duration: 1, 
-      }}
-    />
+      {isVisible && (
+        <motion.div
+          initial={{ scaleY: 0 }}
+          animate={{ scaleY: 1 }}
+          exit={{ scaleY: 0 }}
+          transition={{ duration: 0.3, ease: [0.6, -0.05, 0.01, 0.99] }}
+          className="bg-rose-200 w-full h-screen fixed inset-0 origin-bottom z-[10000]"
+        />
+      )}
+      {!isVisible && (
+        <motion.div
+          initial={{ scaleY: 1 }}
+          animate={{ scaleY: 0 }}
+          exit={{ scaleY: 0 }}
+          transition={{ duration: 0.5, ease: [0.6, -0.05, 0.01, 0.99] }}
+          className="bg-rose-200 w-full h-screen fixed inset-0 origin-top z-[10000]"
+        />
+      )}
       {children}
     </>
-    
   );
 };
 
