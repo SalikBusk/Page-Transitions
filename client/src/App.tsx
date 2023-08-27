@@ -15,15 +15,12 @@ import Navbar from './Components/Navbar';
 import Home from './Pages/Home';
 import About from './Pages/About';
 import Contact from './Pages/Contact';
-import Transition from './Transition/Transition';
 
 const Layout = () => {
   return(
     <div>
       <Navbar/>
-      <Transition>
-        <Outlet/>
-      </Transition>
+      <Outlet/>
     </div>
   )
 }
@@ -35,7 +32,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home/>,
+        element: <><Home/></>,
       },
       {
         path: "/about",

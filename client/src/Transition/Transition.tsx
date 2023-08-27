@@ -3,10 +3,13 @@ import { motion } from 'framer-motion';
 
 interface TransitionProps {
   children: React.ReactNode;
-  ScaleX: boolean,
+  scaleX?: number;
+  scaleY?: number;
+  opacity?: number;
 }
 
-const Transition: React.FC<TransitionProps> = ({ children, ScaleX }) => {
+const Transition: React.FC<TransitionProps> = ({ children, scaleX, scaleY, opacity }) => {
+
   return (
     <motion.div
       initial="pageInitial"
@@ -14,25 +17,28 @@ const Transition: React.FC<TransitionProps> = ({ children, ScaleX }) => {
       exit="pageExit"
       variants={{
         pageInitial: {
-          ${ScaleX ? "" : ""},
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(5px)',
+          filter: "blur(5px)",
+          scale: 1.1,
         },
         pageAnimate: {
+          filter: "blur(0px)",
           scale: 1,
-          filter: 'blur(0px)',
         },
         pageExit: {
-          scale: 0,
-          opacity: 0,
-          filter: 'blur(0px)',
+          filter: "blur(5px)",
+          scale: 1.1,
         },
       }}
       transition={{
-        delay: 0.5, 
+        scaleX: scaleX !== undefined ? { duration: 0.5, ease: 'easeInOut', scaleX } : undefined,
+        scaleY: scaleY !== undefined ? { duration: 0.5, ease: 'easeInOut', scaleY } : undefined,
+        opacity: { duration: 0.5, ease: 'easeInOut' },
+        filter: {
+          blur: [0, 5],
+          duration: 0.5,
+          ease: 'easeInOut',
+        },
       }}
-      className=''
     >
       {children}
     </motion.div>
