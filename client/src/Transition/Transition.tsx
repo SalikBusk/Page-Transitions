@@ -1,33 +1,41 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
 
 interface TransitionProps {
-  OgComponent: React.ComponentType<any>;
+  children: React.ReactNode;
+  ScaleX: boolean,
 }
 
-const Transition: React.FC<TransitionProps> = ({ OgComponent }) => {
+const Transition: React.FC<TransitionProps> = ({ children, ScaleX }) => {
   return (
-    <AnimatePresence>
-      <OgComponent />
-      <motion.div
-        initial="pageInitial"
-        animate="pageAnimate"
-        exit="pageExit"
-        variants={{
-          pageInitial: {
-            opacity: 0,
-          },
-          pageAnimate: {
-            opacity: 1,
-          },
-          pageExit: {
-            backgroundColor: 'white',
-            filter: 'invert()',
-            opacity: 0,
-          }
-        }}
-      />
-    </AnimatePresence>
+    <motion.div
+      initial="pageInitial"
+      animate="pageAnimate"
+      exit="pageExit"
+      variants={{
+        pageInitial: {
+          ${ScaleX ? "" : ""},
+          scale: 1,
+          opacity: 1,
+          filter: 'blur(5px)',
+        },
+        pageAnimate: {
+          scale: 1,
+          filter: 'blur(0px)',
+        },
+        pageExit: {
+          scale: 0,
+          opacity: 0,
+          filter: 'blur(0px)',
+        },
+      }}
+      transition={{
+        delay: 0.5, 
+      }}
+      className=''
+    >
+      {children}
+    </motion.div>
   );
 };
 

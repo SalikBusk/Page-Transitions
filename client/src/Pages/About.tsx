@@ -1,14 +1,11 @@
-import React from 'react'
-import PageTransition from '../Transition/PageTransition'
+import React from "react";
 
 const About = () => {
   return (
-     <PageTransition>
-      <div className='flex flex-col items-center justify-center w-full h-screen'>
-        <h1>About</h1>
-      </div>
-     </PageTransition>
-  )
-}
+    <div className="flex flex-col items-center justify-center w-full h-screen bg-light dark:bg-dark">
+      <h1>About</h1>
+    </div>
+  );
+};
 
-export default About
+export default About;
